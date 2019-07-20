@@ -36,7 +36,7 @@ train_label, hair_dic, eye_dic = make_tag("./tags.csv")
 
 tag_size = len(hair_dic) + len(eye_dic)
 
-#test_tags  = torch.Tensor(np.load("./test_tags.npy")).float().to(device)
+test_tags  = torch.Tensor(np.load("./test_tags.npy")).float().to(device)
 
 def weights_init(m):
     classname = m.__class__.__name__
@@ -173,7 +173,7 @@ def train(batchsize, epochs):
                 G_losses.append(errG.item())
             
             count += 1
-        '''if epoch%3 == 0:
+        if epoch%3 == 0:
             with torch.no_grad():
                 test_img = netG(fixed_noise, test_tags).detach().cpu()
             test_img = test_img.numpy()                
@@ -188,7 +188,7 @@ def train(batchsize, epochs):
                     axs[i,j].axis('off')
                     cnt += 1
             fig.savefig("./output/"+str(epoch)+".png")
-            plt.close()'''
+            plt.close()
         print("d loss: %.6f , d_tag loss: %.6f, g loss: %.6f , g_tag loss: %.6f" %(D_real_loss.item(), D_tag_loss.item(), G_real_loss.item(), G_tag_loss.item()))
     torch.save({'g': netG.state_dict(), 'd': netD.state_dict()},"model_best")
 if __name__ == '__main__':
