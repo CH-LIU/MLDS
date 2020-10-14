@@ -9,7 +9,7 @@ from torch.distributions import Categorical
 import torch.optim as optim
 from model import *
 
-device = torch.device("cuda:1" if (torch.cuda.is_available()) else "cpu")
+device = torch.device("cuda:0" if (torch.cuda.is_available()) else "cpu")
 print(device)
 
 def prepro(o,image_size=[80,80,1]):
